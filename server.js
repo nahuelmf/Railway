@@ -156,7 +156,27 @@ app.post('/logout', (req, res) => {
 app.use(apiInfo)
 app.use(apiRandom)
 
-const PORT = args.port
+
+const PORT = process.env.PORT;
+const MODE = process.env.MODE;
+const MONGO_URL = process.env.MONGO_URL;
+
+app.get("/", (req, res) => {
+  res.json({
+    PORT,
+    MODE,
+    MONGO_URL,
+  });
+});
+
+app.listen(PORT, () => {
+  console.log({
+    PORT,
+    MODE,
+    MONGO_URL,
+  });
+});
+
 
 const srv = server.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`)
